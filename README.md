@@ -41,4 +41,18 @@ ArrayY = { 0, 1, 2, 3, 1, 0, 3, 2, 2, 3, 1, 0 }
 ArrayX = { 2, 0, 1, 3, 7, 5, 6, 4, 8, 11, 10, 9 }
 ArrayY = { 0, 1, 2, 3, 5, 4, 7, 6, 10, 11, 9, 8 }
 ```
-
+## 遊戲狀態
+透過點擊並拖曳地圖座標```MapOffset```放置至平行或垂直的臨近座標進行方塊交換，再將地圖座標的座標值傳入模組中檢測是否有連線
+```
+//將二座標對應至矩陣中進行交換回傳交換後是否成功連線並清除矩陣中的值
+bool swap = CubeCrushModel.Swap(Vector2Int offset1, Vector2Int offset2)
+//若交換成功就填補空缺
+CubeCrushModel.FillEmpty()
+```
+若交換失敗則將原先交換位置的方塊回歸，若成功則對應矩陣消除並填補方塊，之後在依據填補情形檢查場上是否存在連線。
+```
+//檢查場上是否存在連線，若有連線則重複動作
+bool checked = CubeCrushModel.CheckFilled()
+//若無則盡興是否有可連線的預測
+bool gameOver = CubeCrushModel.GameOver()
+```
